@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置 Struts 可以受理的请求的扩展名 -->
+	<constant name="struts.action.extension" value="action,do"></constant>
+	
+	<!-- 打开允许动态方法调用的开关, 默认是 false -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	
+	<!-- 编码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	
+	<!-- 配置国际化资源文件 -->
+	<constant name="struts.custom.i18n.resources" value="i18n"></constant>
+	
+	<!-- 所允许上传文件的大小 -->
+	<constant name="struts.multipart.maxSize" value="10500000" />
+    
+    <constant name="struts.devMode" value="false" />
+	<!-- 
+		package:包.struts2使用package来组织
+		name 属性:必须.用于其他的包引用当前包
+		extends:当前包继承哪个包，继承的，即可以继其中的所有配置，通常情况下继承struts-default
+	 -->
+    <package name="default" namespace="/" extends="struts-default">
+  		<!-- 管理员action -->
+        <action name="managers_*" class="managersAction" method="{1}">
+       		<result name="list">/page/managers/managers.jsp</result>
+<!--        		<result name="success" type="redirect">/managers_list.action</result>
+ -->
+ 			 <result type="stream" name="delete">
+       			 <param name="contentType">text/html</param>
+        		 <param name="inputName">inputStream</param>
+  			 </result>
+        </action>
+        
+        <!-- 用户action -->
+        <action name="users_*" class="usersAction" method="{1}">
+        	<result name="list">/page/users/userslist.jsp</result>
+        </action>
+        
+    </package>
+
+    
+</struts>
+

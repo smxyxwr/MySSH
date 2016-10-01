@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 配置Dao -->
+	<!-- 管理员Dao -->
+	<bean id="managersDao" class="com.atsmxy.xwr.dao.ManagersDao" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 用户Dao -->
+	<bean id="usersDao" class="com.atsmxy.xwr.dao.UsersDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	
+	<!-- 配置Service -->
+	<!-- 管理员Service -->
+	<bean id="managersService" class="com.atsmxy.xwr.service.ManagersService">
+		<property name="managersDao" ref="managersDao"></property>
+	</bean>
+	<!-- 用户Service -->
+	<bean id="usersService" class="com.atsmxy.xwr.service.UsersService">
+		<property name="usersDao" ref="usersDao"></property>
+	</bean>
+	
+	
+	<!-- 配置Action -->
+	<!-- 管理员Action -->
+	<bean id="managersAction" class="com.atsmxy.xwr.actions.ManagersAction" 
+	scope="prototype">
+		<property name="managersService" ref="managersService"></property>
+	</bean>
+	<!-- 用户Action -->
+	<bean id="usersAction" class="com.atsmxy.xwr.actions.UsersAction"
+	scope="prototype">
+		<property name="usersService" ref="usersService"></property>
+	</bean>
+	
+</beans>
